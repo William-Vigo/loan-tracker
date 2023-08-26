@@ -1,0 +1,32 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%; /* Adjust this if needed */
+  width: 250px;
+  background-color: #0f141e;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: white;
+}
+
+
+.sidebar-icon {
+    filter: brightness(0) invert(1); /* Change color to white */
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+#sidebar-sublist {
+    display: none;
+}
+
+.sidebar li:hover #sidebar-sublist {
+    display: block;
+}
