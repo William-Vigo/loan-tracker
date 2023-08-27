@@ -2,13 +2,16 @@
 
 @import url(../styles/global.css);
 
+:root {
+    --sidebar-width: 250px
+}
 
 .sidebar {
   position: fixed;
   left: 0;
   top: 0;
   height: 100%; /* Adjust this if needed */
-  width: 250px;
+  width: var(--sidebar-width);
   background-color: #0f141e;
   color: red; /* TODO: remove this once we are done*/ 
 }
