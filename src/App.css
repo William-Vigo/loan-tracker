@@ -1,0 +1,7 @@
+.app-container {
+  display: flex;
+}
+
+.content {
+  padding-left: var(--sidebar-width);
+}
