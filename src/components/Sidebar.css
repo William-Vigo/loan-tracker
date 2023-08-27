@@ -1,3 +1,11 @@
+/* setting font */
+
+@import url(../fonts/fonts.css);
+
+body {
+    font-family: 'Poppins-ExtraLight';
+}
+
 .sidebar {
   position: fixed;
   left: 0;
@@ -5,22 +13,39 @@
   height: 100%; /* Adjust this if needed */
   width: 250px;
   background-color: #0f141e;
-  color: white;
-  padding: 20px;
+  color: red; /* TODO: remove this once we are done*/ 
 }
 
 .sidebar a {
     text-decoration: none;
-    color: white;
+    color: #c9ccd8;
+    font-weight: 900;
 }
 
 
-.sidebar-icon {
-    filter: brightness(0) invert(1); /* Change color to white */
-}
 
 .sidebar ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+    display: flex;
+    flex-flow: column;
+}
+
+.sidebar-link {
+    margin: 0;
+    padding: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 10px;
+}
+
+.group-title {
+    margin: 0;
+    padding: 0;
+    color: #c9ccd8;
 }
 
 #sidebar-sublist {
@@ -29,4 +54,30 @@
 
 .sidebar li:hover #sidebar-sublist {
     display: block;
+}
+
+.sidebar span {
+    vertical-align: middle;
+    font-size: 15px; 
+}
+/* side-bar sublist css*/
+.sidebar-sublist-link {
+    margin: 0;
+    padding: 0;
+    padding-left: 45px;
+    display: flex;
+    flex-flow: column;
+}
+.sidebar-sublist-link span {
+    vertical-align: middle;
+    font-size: 13px; 
+}
+
+/* icon css*/
+.sidebar-icon {
+    width: 25px; /* Adjust the width to your desired size */
+    height: 25px; /* Adjust the height to your desired size */
+    margin-right: 8px;
+    vertical-align: middle;
+    fill: #c9ccd8 !important
 }
