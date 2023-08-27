@@ -1,0 +1,68 @@
+
+/* Center the form and style the container */
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust as needed */
+}
+
+.form-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff; /* Optional: Add a background color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    width: 300px;
+    max-height: 100%;
+}
+
+/* Style form inputs and labels */
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+    margin-right: 10px;
+    font-weight: 900;
+    font-size: 10px;    
+    color: #1b1a1a
+}
+
+/* input box css*/
+.form-group input {
+    padding-left: 0;
+    padding-bottom: 8px;
+    font-family: 'Poppins-ExtraLight';
+    font-size: 15px;
+    font-weight: 900;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    width: calc(100% - 50px);
+    outline: none;
+}
+
+.form-group input:focus {
+    border-bottom-color: #007bff
+}
+
+/* Style the button */
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.button-group button {
+  padding: 8px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 25%;
+}
+
+.form-group button:hover {
+  background-color: #0056b3;
+}
