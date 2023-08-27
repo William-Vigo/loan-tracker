@@ -1,10 +1,7 @@
 /* setting font */
 
-@import url(../fonts/fonts.css);
+@import url(../styles/global.css);
 
-body {
-    font-family: 'Poppins-ExtraLight';
-}
 
 .sidebar {
   position: fixed;
