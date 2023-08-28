@@ -1,11 +1,25 @@
 import { useForm } from "react-hook-form";
 import "./NuevoCliente.css"
-
+import {v4 as uuidv4} from "uuid"
 export function NewClient() {
-  const { register, handleSubmit, formState : {errors}} = useForm();
+  const { register, handleSubmit, formState : {errors}, reset} = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data)
+     const sql = "INSERT INTO Clients (_id, fullName, documentType, documentID, address, email, cellNumber) VALUES (?,?, ?, ?, ?, ?, ?)";
+
+    window.electron.send('insert-new-client', {
+      query: sql,
+      values: [
+        uuidv4(),
+        data.fullName,
+        data.documentType,
+        data.documentID,
+        data.address,
+        data.email,
+        data.cellNumber,
+      ]
+    });
   }
 
   return (

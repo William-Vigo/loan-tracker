@@ -1,7 +1,7 @@
-const { app, BrowserWindow } = require('electron')
-
+const { app, BrowserWindow, ipcMain } = require('electron')
+const sqlite3 = require('sqlite3');
 const path = require('path')
-const isDev = require('electron-is-dev')
+const isDev = require('electron-is-dev');
 
 require('@electron/remote/main').initialize()
 
@@ -12,8 +12,8 @@ function createWindow() {
     height: 600,
     autoHideMenuBar: true,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
-      enableRemoteModule: true
     }
   })
 
@@ -40,3 +40,17 @@ app.on('activate', function () {
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
+
+ipcMain.on('insert-new-client', (_, data) => {
+  console.log(data)
+  dbFilePath = './public/loantracker.db';
+  const db = new sqlite3.Database(dbFilePath);
+  db.run(data.query, data.values, function(err) {
+    if (err) {
+      console.log("error", err);
+    } else {
+      console.log("success");
+    }
+  })
+  db.close();
+});
