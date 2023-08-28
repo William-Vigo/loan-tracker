@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "better-sqlite3": "^8.5.2",
     "concurrently": "^8.2.1",
     "cross-env": "^7.0.3",
     "electron": "^26.1.0",
@@ -23,13 +24,14 @@
   "main": "public/main.js",
   "homepage": "./",
   "scripts": {
+    "init-db": "node public/initDB.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm run electron:start\"",
     "electron:build": "",
-    "electron:start": "wait-on tcp:127.0.0.1:3000 && electron ."
+    "electron:start": "npm run init-db && wait-on tcp:127.0.0.1:3000 && electron ."
   },
   "eslintConfig": {
     "extends": [
