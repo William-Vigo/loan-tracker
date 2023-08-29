@@ -57,11 +57,6 @@ input::placeholder {
 }
 
 /* drop down css */
-.drop-down {
-  font-style: italic;
-  color: #999; /* Placeholder text color */
-  width: calc(100% - 50px);
-}
 /* Style the button */
 
 .button-group {
@@ -80,4 +75,9 @@ input::placeholder {
 
 .form-group button:hover {
   background-color: #0056b3;
+}
+
+
+.invalid-field input{
+  border-bottom: 1px solid red;
 }
