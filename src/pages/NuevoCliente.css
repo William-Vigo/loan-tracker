@@ -1,3 +1,6 @@
+:root {
+    textColor: #1b1a1a
+}
 
 /* Center the form and style the container */
 .page-container {
@@ -44,11 +47,23 @@
     outline: none;
 }
 
+input::placeholder {
+  color: #999; /* Placeholder text color */
+  font-style: italic; /* Placeholder text style */
+}
+
 .form-group input:focus {
     border-bottom-color: #007bff
 }
 
+/* drop down css */
+.drop-down {
+  font-style: italic;
+  color: #999; /* Placeholder text color */
+  width: calc(100% - 50px);
+}
 /* Style the button */
+
 .button-group {
     display: flex;
     gap: 10px;

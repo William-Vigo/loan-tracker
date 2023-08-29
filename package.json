@@ -16,6 +16,7 @@
     "react-hook-form": "^7.45.4",
     "react-router-dom": "^6.15.0",
     "react-scripts": "^5.0.1",
+    "react-select": "^5.7.4",
     "sqlite3": "^5.1.6",
     "wait-for-localhost": "^4.0.1",
     "wait-on": "^7.0.1",
