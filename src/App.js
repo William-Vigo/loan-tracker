@@ -7,6 +7,7 @@ import ListDeClientes from "./pages/ListaDeClientes";
 import Transacciones from "./pages/Transacciones";
 import "./App.css"
 import SidebarV2 from './components/Sidebar';
+import ClientesHome from './pages/ClientesHome';
 //import SidebarV2 from './components/test';
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
       <div className="content">
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/Clientes" element={<Home />} />
+            <Route path="/Clientes" element={<ClientesHome />} />
             <Route path="/Clientes/NuevoCliente" element={<NewClient />} />
             <Route path="/Clientes/Lista" element={<ListDeClientes />} />
             <Route path="/Pagos" element={<Pagos />} />
