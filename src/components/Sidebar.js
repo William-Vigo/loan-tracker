@@ -1,29 +1,134 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Box, Collapse, Drawer, List, ListItemButton, ListItemIcon, ListItemText, createTheme } from '@mui/material'
 import {ReactComponent as HomeIcon} from '../assets/home.svg';
 import {ReactComponent as ClientsIcon} from '../assets/clients.svg';
 import {ReactComponent as PaymentsIcon} from '../assets/clients.svg';
 import {ReactComponent as TransaccionesIcon} from '../assets/receipts.svg';
-import './Sidebar.css';;
+import './Sidebar.css';
+import { ThemeProvider} from '@mui/system';
 
-function Sidebar() {
+const sidebarProps = [
+    {
+        label: 'Home',
+        icon: HomeIcon,
+        link: '/'
+    },
+    {
+        label: 'Clientes',
+        icon: ClientsIcon,
+        link: '/Clientes',
+        sublist: [
+            {
+                label: 'Nuevo Cliente',
+                link: '/Clientes/NuevoCliente'
+            },
+            {
+                label: 'Lista de Clientes',
+                link: '/Clientes/Lista'
+            },
+        ]
+    },
+    {
+        label: 'Pagos',
+        icon: PaymentsIcon,
+        link: '/Pagos'
+    },
+    {
+        label: 'Transacciones',
+        icon: TransaccionesIcon,
+        link: '/Transacciones'
+    },
+]
+
+
+
+const sideBarTheme = createTheme({
+    components: {
+        MuiDrawer: {
+            styleOverrides: {
+                paper: {
+                    backgroundColor: "#0f141e"
+                }
+            },
+            variants: [
+                {
+                    props: {
+                        variant: "permanent",
+                        anchor: "left",
+                    },
+                }
+            ]
+        },
+        MuiListItemText: {
+            defaultProps: {
+                primaryTypographyProps: {
+                    fontFamily: 'Poppins-ExtraLight',
+                    fontWeight: '600',
+                    fontSize: '13px',
+                    padding: '0px',
+                    color: '#c9ccd8'
+                }
+            },
+        },
+        MuiListItemButton: {
+            defaultProps: {
+                style: {
+                    display: 'flex,',
+                    alignProperty: 'center',
+                    paddingBottom: '10px',
+                    width: '100%'
+                } 
+            },
+            styleOverrides: {
+                root: {
+                    '&:hover': {
+                        backgroundColor: 'grey'
+                    }
+                }
+            }
+        },
+        MuiListItemIcon: {
+            defaultProps: {
+                sx: {
+                    minWidth: '0px',
+                    minHeight: '0px'
+                }
+            }
+        }
+    },
+})
+
+function SidebarV2() {
     return (
-        <div className="sidebar">
-            <div>
-                <ul>
-                    <li className="group-title"><h5>Overview</h5></li>
-                    <li className="sidebar-link"><Link to="/"><HomeIcon className="sidebar-icon"/><span>Home</span></Link></li>
-                    <li className="sidebar-link"><Link to="/Clientes"><ClientsIcon className="sidebar-icon"/><span>Clientes</span></Link>
-                        <ul id="sidebar-sublist">
-                            <li className="sidebar-sublist-link"><Link to="/Clientes/NeuvoCliente"><span>Nuevo Cliente</span></Link></li>
-                            <li className="sidebar-sublist-link"><Link to="/Clientes/Lista"><span>Lista de Clientes</span></Link></li>
-                        </ul>
-                    </li>
-                    <li className="sidebar-link"><Link to="/Pagos"><PaymentsIcon className="sidebar-icon"/><span>Pagos</span></Link></li>
-                    <li className="sidebar-link"><Link to="/Transacciones"><TransaccionesIcon className="sidebar-icon"/><span>Transacciones</span></Link></li>
-                </ul>
-            </div>
-        </div>
-    );
+            <Box >
+                <ThemeProvider theme={sideBarTheme}>
+                <Drawer className="sidebar" variant="permanent">
+                    <List>
+                        {sidebarProps.map((data, index) => (
+                            <React.Fragment key={index}>
+                                <ListItemButton component={Link} to={data.link}>
+                                        <ListItemIcon> <data.icon className="icon"/> </ListItemIcon>
+                                        <ListItemText primary={data.label}/>
+                                </ListItemButton>
+
+                            {data.sublist && (
+                                <Collapse in={true}>
+                                    <List disablePadding>
+                                        {data.sublist.map((subListItems) => (
+                                            <ListItemButton sx={{paddingLeft: 8}} component={Link} to={subListItems.link}>
+                                                        <ListItemText primary={subListItems.label}/>
+                                            </ListItemButton>
+                                        ))}
+                                    </List>
+                                </Collapse>
+                            )}
+                            </React.Fragment>
+                        ))}
+                    </List>
+                </Drawer>
+                </ThemeProvider>
+            </Box>
+    )
 }
-export default Sidebar
+export default SidebarV2
