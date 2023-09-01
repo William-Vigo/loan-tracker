@@ -8,13 +8,14 @@ import {ReactComponent as TransaccionesIcon} from '../assets/receipts.svg';
 import './Sidebar.css';
 import { ThemeProvider} from '@mui/system';
 
-
-
-
-
 const sideBarTheme = createTheme({
     components: {
         MuiDrawer: {
+            defaultProps: {
+                style: {
+                    width: 200
+                }
+            },
             styleOverrides: {
                 paper: {
                     backgroundColor: "#0f141e"
@@ -109,7 +110,7 @@ function SidebarV2() {
     },
 ]
     return (
-            <Box >
+            <Box>
                 <ThemeProvider theme={sideBarTheme}>
                 <Drawer className="sidebar" variant="permanent">
                     <List>
