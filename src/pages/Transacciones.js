@@ -2,7 +2,7 @@ import React from 'react'
 
 function Transacciones() {
     return (
-            <h1>clients page</h1>
+            <h1>transactions page</h1>
     )
 }
 

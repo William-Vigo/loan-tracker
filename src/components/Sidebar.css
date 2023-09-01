@@ -2,14 +2,6 @@
 
 @import url(../styles/global.css);
 
-:root {
-    --sidebar-width: 130px
-}
-
-.sidebar {
-    width: var(--sidebar-width);
-}
-
 .icon {
     height: 25px;
     width: 25px;

@@ -8,44 +8,14 @@ import {ReactComponent as TransaccionesIcon} from '../assets/receipts.svg';
 import './Sidebar.css';
 import { ThemeProvider} from '@mui/system';
 
-const sidebarProps = [
-    {
-        label: 'Home',
-        icon: HomeIcon,
-        link: '/'
-    },
-    {
-        label: 'Clientes',
-        icon: ClientsIcon,
-        link: '/Clientes',
-        sublist: [
-            {
-                label: 'Nuevo Cliente',
-                link: '/Clientes/NuevoCliente'
-            },
-            {
-                label: 'Lista de Clientes',
-                link: '/Clientes/Lista'
-            },
-        ]
-    },
-    {
-        label: 'Pagos',
-        icon: PaymentsIcon,
-        link: '/Pagos'
-    },
-    {
-        label: 'Transacciones',
-        icon: TransaccionesIcon,
-        link: '/Transacciones'
-    },
-]
-
-
-
 const sideBarTheme = createTheme({
     components: {
         MuiDrawer: {
+            defaultProps: {
+                style: {
+                    width: 200
+                }
+            },
             styleOverrides: {
                 paper: {
                     backgroundColor: "#0f141e"
@@ -100,23 +70,62 @@ const sideBarTheme = createTheme({
 })
 
 function SidebarV2() {
+    console.log('sidebar render')
+    const [open, setOpen] = React.useState(true);
+
+    const HandleClick = () => {
+        setOpen(!open);
+    }
+    const sidebarProps = [
+    {
+        label: 'Home',
+        icon: HomeIcon,
+        link: '/'
+    },
+    {
+        label: 'Clientes',
+        icon: ClientsIcon,
+        link: '/Clientes',
+        sublist: [
+            {
+                label: 'Nuevo Cliente',
+                link: '/Clientes/NuevoCliente'
+            },
+            {
+                label: 'Lista de Clientes',
+                link: '/Clientes/Lista'
+            },
+        ],
+        onClickFunc: () => HandleClick()
+    },
+    {
+        label: 'Pagos',
+        icon: PaymentsIcon,
+        link: '/Pagos'
+    },
+    {
+        label: 'Transacciones',
+        icon: TransaccionesIcon,
+        link: '/Transacciones'
+    },
+]
     return (
-            <Box >
+            <Box>
                 <ThemeProvider theme={sideBarTheme}>
                 <Drawer className="sidebar" variant="permanent">
                     <List>
                         {sidebarProps.map((data, index) => (
                             <React.Fragment key={index}>
-                                <ListItemButton component={Link} to={data.link}>
+                                <ListItemButton component={Link} to={data.link} onClick={data.sublist ? HandleClick: undefined}>
                                         <ListItemIcon> <data.icon className="icon"/> </ListItemIcon>
                                         <ListItemText primary={data.label}/>
                                 </ListItemButton>
 
                             {data.sublist && (
-                                <Collapse in={true}>
+                                <Collapse in={open}>
                                     <List disablePadding>
-                                        {data.sublist.map((subListItems) => (
-                                            <ListItemButton sx={{paddingLeft: 8}} component={Link} to={subListItems.link}>
+                                        {data.sublist.map((subListItems, subListIndex) => (
+                                            <ListItemButton key={subListIndex}sx={{paddingLeft: 8}} component={Link} to={subListItems.link}>
                                                         <ListItemText primary={subListItems.label}/>
                                             </ListItemButton>
                                         ))}
