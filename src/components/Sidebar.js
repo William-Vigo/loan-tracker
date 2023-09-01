@@ -1,13 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Collapse, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Paper, createTheme } from '@mui/material'
+import {  Collapse, Drawer, List, ListItemButton, ListItemIcon, ListItemText, createTheme } from '@mui/material'
 import {ReactComponent as HomeIcon} from '../assets/home.svg';
 import {ReactComponent as ClientsIcon} from '../assets/clients.svg';
 import {ReactComponent as PaymentsIcon} from '../assets/clients.svg';
 import {ReactComponent as TransaccionesIcon} from '../assets/receipts.svg';
 import './Sidebar.css';
-import { ThemeProvider, border, display, positions, width} from '@mui/system';
-import { green } from '@mui/material/colors';
+import { ThemeProvider} from '@mui/system';
 
 export const sideBarWidth = 180
 
