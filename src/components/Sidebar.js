@@ -129,7 +129,7 @@ function SidebarV2() {
                                 <Collapse in={open}>
                                     <List disablePadding>
                                         {data.sublist.map((subListItems, subListIndex) => (
-                                            <ListItemButton key={subListIndex}sx={{paddingLeft: 8}} component={Link} to={subListItems.link}>
+                                            <ListItemButton key={subListIndex}sx={{paddingLeft: 6}} component={Link} to={subListItems.link}>
                                                         <ListItemText primary={subListItems.label}/>
                                             </ListItemButton>
                                         ))}
