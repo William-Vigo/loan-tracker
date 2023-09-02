@@ -6,7 +6,7 @@ const fields = [
         placeHolder: "Ever Vigo"
     },
     {
-        label: "Tipo de documento",
+        label: "Documento",
         isDropDown: true,
         options: [
             {
@@ -62,10 +62,9 @@ export function NewClientV2() {
                     <Grid width={"300px"} item key={index}>
                         {field.isDropDown ? (
                            <Autocomplete 
-                            variant="standard"
                             disablePortal
                             options={field.options}
-                            renderInput={(params) => <TextField {...params} label="Tipo de documento"/>}
+                            renderInput={(params) => <TextField variant="standard" placeholder="documento" {...params} label={field.label}/>}
                            />
                         ) : (
                             <TextField placeholder={field.placeHolder} fullWidth variant="standard" label={field.label} InputLabelProps={{
