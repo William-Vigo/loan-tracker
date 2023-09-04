@@ -1,9 +1,9 @@
 import React from 'react'
 
-function ListDeClientes() {
+function ListaDeClientes() {
     return (
-            <h1>list page</h1>
+            <div>list page</div>
     )
 }
 
-export default ListDeClientes
+export default ListaDeClientes
