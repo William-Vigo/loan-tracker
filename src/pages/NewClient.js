@@ -1,6 +1,7 @@
 import { Box, Grid, TextField,  Autocomplete, Button, Typography  } from "@mui/material";
-import React, {useRef} from "react";
+import React from "react";
 import { Controller, useForm} from "react-hook-form";
+import {v4 as uuidv4} from "uuid"
 
 const fields = [
     {
@@ -61,6 +62,20 @@ export function NewClientV2() {
 
   const onSubmit = data => {
     console.log(data);
+    const sql = "INSERT INTO Clients (_id, fullName, documentType, documentID, address, email, cellNumber) VALUES (?,?, ?, ?, ?, ?, ?)";
+    window.electron.send('insert-new-client', {
+      query: sql,
+      values: [
+        uuidv4(),
+        data.fullName,
+        data.documentType,
+        data.documentID,
+        data.address,
+        data.email,
+        data.cellNumber,
+      ]
+    });
+
     reset();
     setAutoCompleteData({})
   }
