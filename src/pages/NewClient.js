@@ -101,6 +101,7 @@ export function NewClientV2() {
                             <Controller
                             name={prop.key}
                             control={control}
+                            rules={{required: true}}
                             render={({field}) => (
                                 <Autocomplete
                                     {...field}
@@ -125,7 +126,12 @@ export function NewClientV2() {
                                         </Box>
                                     )}
                                     renderInput={(params) => (
-                                    <TextField {...params} variant="standard" placeholder="documento"  label={prop.label} 
+                                    <TextField 
+                                    {...params}
+                                    variant="standard"
+                                    placeholder="documento"
+                                    label={prop.label} 
+                                    error={Boolean(errors[prop.key])}
                                     InputProps={{
                                         ...params.InputProps,
                                         style: {
@@ -149,14 +155,26 @@ export function NewClientV2() {
                             name={prop.key}
                             control={control}
                             defaultValue=""
+                            rules={{required: true}}
                             render={({field}) => (
-                                <TextField {...field} placeholder={prop.placeHolder} fullWidth variant="standard" label={prop.label} InputLabelProps={{
+                                <TextField 
+                                {...field}
+                                error={Boolean(errors[prop.key])} 
+                                style={{
+                                    borderColor: errors[prop.key] ? 'red' : 'default'
+                                }}
+                                placeholder={prop.placeHolder}
+                                fullWidth 
+                                variant="standard" 
+                                label={prop.label} 
+                                InputLabelProps={{
                                     style: {
                                         fontSize: "13px", 
                                         fontFamily: 'Poppins-ExtraLight',
                                         fontWeight: "1000",
                                     }
-                                }} inputProps={{
+                                }}
+                                inputProps={{
                                     style: {
                                         fontSize: "15px", 
                                         fontFamily: 'Poppins-ExtraLight',
