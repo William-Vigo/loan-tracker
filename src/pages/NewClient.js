@@ -1,5 +1,4 @@
-import { Box, Grid, TextField,  Autocomplete, Button  } from "@mui/material";
-import { color } from "@mui/system";
+import { Box, Grid, TextField,  Autocomplete, Button, Typography  } from "@mui/material";
 import React, {useRef} from "react";
 import { Controller, useForm} from "react-hook-form";
 
@@ -101,8 +100,26 @@ export function NewClientV2() {
                                     onBlur={field.onBlur}
                                     disablePortal
                                     options={prop.options}
+                                    renderOption={(option, data) => (
+                                        <Box component="li" {...option} key={option.key}style={{
+                                            fontSize: "13px", 
+                                            fontFamily: 'Poppins-ExtraLight',
+                                            fontWeight: "1000",
+                                        }}>
+                                            {data.label}
+                                        </Box>
+                                    )}
                                     renderInput={(params) => (
-                                    <TextField {...params} variant="standard" placeholder="documento"  label={prop.label} InputLabelProps={{
+                                    <TextField {...params} variant="standard" placeholder="documento"  label={prop.label} 
+                                    InputProps={{
+                                        ...params.InputProps,
+                                        style: {
+                                            fontSize: "15px", 
+                                            fontFamily: 'Poppins-ExtraLight',
+                                            fontWeight: "1000",
+                                        }
+                                    }}
+                                    InputLabelProps={{
                                         style: {
                                             fontSize: "13px", 
                                             fontFamily: 'Poppins-ExtraLight',
