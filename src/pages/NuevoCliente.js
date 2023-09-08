@@ -60,12 +60,10 @@ const theme = createTheme({
             styleOverrides: {
                 input: { //input props
                     fontSize: "15px", 
-                    fontFamily: 'Poppins-ExtraLight',
                     fontWeight: "1000"
                 },
                 option: { // options
                     fontSize: "13px", 
-                    fontFamily: 'Poppins-ExtraLight',
                     fontWeight: "1000"
                 }
             }
@@ -76,7 +74,7 @@ const theme = createTheme({
                 style: {
                     fontSize: "15px",
                     fontFamily: 'Poppins-ExtraLight',
-                    fontWeight: "900",
+                    fontWeight: "1000",
                 }
                 }
             }
@@ -85,7 +83,6 @@ const theme = createTheme({
             defaultProps: {
                 style: {
                 fontSize: "13px",
-                fontFamily: 'Poppins-ExtraLight',
                 fontWeight: "1000",
                 }
             }
