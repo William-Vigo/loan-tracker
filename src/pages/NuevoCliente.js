@@ -100,7 +100,7 @@ export function NewClientV2() {
   }
 
   const onSubmit = data => {
-    console.log(data);
+    console.log(data); //TODO: remove
     const sql = "INSERT INTO Clients (_id, fullName, documentType, documentID, address, email, cellNumber) VALUES (?,?, ?, ?, ?, ?, ?)";
     window.electron.send('insert-new-client', {
       query: sql,
