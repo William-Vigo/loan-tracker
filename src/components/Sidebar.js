@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Collapse, Drawer, List, ListItemButton, ListItemIcon, ListItemText, createTheme } from '@mui/material'
+import {  Collapse, Drawer, List, ListItemButton, ListItemIcon, ListItemText, createTheme } from '@mui/material'
 import {ReactComponent as HomeIcon} from '../assets/home.svg';
 import {ReactComponent as ClientsIcon} from '../assets/clients.svg';
 import {ReactComponent as PaymentsIcon} from '../assets/clients.svg';
@@ -8,17 +8,22 @@ import {ReactComponent as TransaccionesIcon} from '../assets/receipts.svg';
 import './Sidebar.css';
 import { ThemeProvider} from '@mui/system';
 
+export const sideBarWidth = 180
+
 const sideBarTheme = createTheme({
     components: {
+        MuiPaper: {
+            defaultProps: {
+                style: {
+                    backgroundColor: "#0f141e",
+                    width: `${sideBarWidth}px`,
+                }
+            }
+        },
         MuiDrawer: {
             defaultProps: {
                 style: {
-                    width: 200
-                }
-            },
-            styleOverrides: {
-                paper: {
-                    backgroundColor: "#0f141e"
+                    width: `${sideBarWidth}px`,
                 }
             },
             variants: [
@@ -110,9 +115,8 @@ function SidebarV2() {
     },
 ]
     return (
-            <Box>
-                <ThemeProvider theme={sideBarTheme}>
-                <Drawer className="sidebar" variant="permanent">
+            <ThemeProvider theme={sideBarTheme}>
+                <Drawer  variant="permanent" >
                     <List>
                         {sidebarProps.map((data, index) => (
                             <React.Fragment key={index}>
@@ -125,7 +129,7 @@ function SidebarV2() {
                                 <Collapse in={open}>
                                     <List disablePadding>
                                         {data.sublist.map((subListItems, subListIndex) => (
-                                            <ListItemButton key={subListIndex}sx={{paddingLeft: 8}} component={Link} to={subListItems.link}>
+                                            <ListItemButton key={subListIndex}sx={{paddingLeft: 6}} component={Link} to={subListItems.link}>
                                                         <ListItemText primary={subListItems.label}/>
                                             </ListItemButton>
                                         ))}
@@ -136,8 +140,7 @@ function SidebarV2() {
                         ))}
                     </List>
                 </Drawer>
-                </ThemeProvider>
-            </Box>
+            </ThemeProvider>
     )
 }
 export default SidebarV2
