@@ -1,4 +1,4 @@
-import { Box, Grid, TextField,  Autocomplete, Button, Typography  } from "@mui/material";
+import { Box, Grid, TextField,  Autocomplete, Button, Typography, createTheme, ThemeProvider  } from "@mui/material";
 import React from "react";
 import { Controller, useForm} from "react-hook-form";
 import {v4 as uuidv4} from "uuid"
@@ -50,6 +50,48 @@ const fields = [
     },
 ]
 
+const theme = createTheme({
+    typography: {
+        fontFamily: 'Poppins-ExtraLight',
+        fontWeightLight: 1000,
+    },
+    components: {
+        MuiAutocomplete: {
+            styleOverrides: {
+                input: { //input props
+                    fontSize: "15px", 
+                    fontFamily: 'Poppins-ExtraLight',
+                    fontWeight: "1000"
+                },
+                option: { // options
+                    fontSize: "13px", 
+                    fontFamily: 'Poppins-ExtraLight',
+                    fontWeight: "1000"
+                }
+            }
+        },
+        MuiInput: {  // for InputProps
+            defaultProps: {
+                inputProps: {
+                style: {
+                    fontSize: "15px",
+                    fontFamily: 'Poppins-ExtraLight',
+                    fontWeight: "900",
+                }
+                }
+            }
+        },
+        MuiInputLabel: {  // for InputLabelProps
+            defaultProps: {
+                style: {
+                fontSize: "13px",
+                fontFamily: 'Poppins-ExtraLight',
+                fontWeight: "1000",
+                }
+            }
+        },
+    }
+})
 
 export function NewClientV2() {
   const { control, register, handleSubmit, reset, formState: {errors}} = useForm();
@@ -85,6 +127,7 @@ export function NewClientV2() {
         alignItems="center"
         minHeight="100vh"
         >
+        <ThemeProvider theme={theme}>
         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid 
             container 
@@ -117,70 +160,33 @@ export function NewClientV2() {
                                     disablePortal
                                     options={prop.options}
                                     renderOption={(option, data) => (
-                                        <Box component="li" {...option} key={option.key}style={{
-                                            fontSize: "13px", 
-                                            fontFamily: 'Poppins-ExtraLight',
-                                            fontWeight: "1000",
-                                        }}>
-                                            {data.label}
-                                        </Box>
+                                        <Box component="li" {...option} key={option.key}>{data.label}</Box>
                                     )}
                                     renderInput={(params) => (
-                                    <TextField 
-                                    {...params}
-                                    variant="standard"
-                                    placeholder="documento"
-                                    label={prop.label} 
-                                    error={Boolean(errors[prop.key])}
-                                    InputProps={{
-                                        ...params.InputProps,
-                                        style: {
-                                            fontSize: "15px", 
-                                            fontFamily: 'Poppins-ExtraLight',
-                                            fontWeight: "1000",
-                                        }
-                                    }}
-                                    InputLabelProps={{
-                                        style: {
-                                            fontSize: "13px", 
-                                            fontFamily: 'Poppins-ExtraLight',
-                                            fontWeight: "1000",
-                                        }
-                                    }}/>)}
+                                    <TextField {...params} variant="standard" placeholder="documento" label={prop.label} error={Boolean(errors[prop.key])}
+                                    />)}
                                 />
                             )}
                            />
                         ) : (
                             <Controller
-                            name={prop.key}
-                            control={control}
-                            defaultValue=""
-                            rules={{required: true}}
-                            render={({field}) => (
-                                <TextField 
-                                {...field}
-                                error={Boolean(errors[prop.key])} 
-                                style={{
-                                    borderColor: errors[prop.key] ? 'red' : 'default'
-                                }}
-                                placeholder={prop.placeHolder}
-                                fullWidth 
-                                variant="standard" 
-                                label={prop.label} 
-                                InputLabelProps={{
-                                    style: {
-                                        fontSize: "13px", 
-                                        fontFamily: 'Poppins-ExtraLight',
-                                        fontWeight: "1000",
-                                    }
-                                }}
-                                inputProps={{
-                                    style: {
-                                        fontSize: "15px", 
-                                        fontFamily: 'Poppins-ExtraLight',
-                                        fontWeight: "900",
-                                    }}}/>
-                                )}
+                                name={prop.key}
+                                control={control}
+                                defaultValue=""
+                                rules={{required: true}}
+                                render={({field}) => (
+                                    <TextField 
+                                        {...field}
+                                        error={Boolean(errors[prop.key])} 
+                                        style={{
+                                            borderColor: errors[prop.key] ? 'red' : 'default'
+                                        }}
+                                        placeholder={prop.placeHolder}
+                                        fullWidth 
+                                        variant="standard" 
+                                        label={prop.label} 
+                                    />
+                                    )}
                             />
                         )}
                     </Grid>
@@ -195,6 +201,7 @@ export function NewClientV2() {
                 </Grid>
             </Grid>
         </form>
+        </ThemeProvider>
         </Box>
     )
 }
