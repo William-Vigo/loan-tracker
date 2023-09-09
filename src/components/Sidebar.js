@@ -75,7 +75,6 @@ const sideBarTheme = createTheme({
 })
 
 function SidebarV2() {
-    console.log('sidebar render')
     const [open, setOpen] = React.useState(true);
 
     const HandleClick = () => {

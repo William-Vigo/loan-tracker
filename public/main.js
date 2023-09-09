@@ -4,6 +4,7 @@ const path = require('path')
 const isDev = require('electron-is-dev');
 
 require('@electron/remote/main').initialize()
+dbFilePath = './public/loantracker.db';
 
 function createWindow() {
   // Create the browser window.
@@ -41,9 +42,9 @@ app.on('activate', function () {
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
 
+// Todo erorr handling
 ipcMain.on('insert-new-client', (_, data) => {
   console.log(data)
-  dbFilePath = './public/loantracker.db';
   const db = new sqlite3.Database(dbFilePath);
   db.run(data.query, data.values, function(err) {
     if (err) {
@@ -54,3 +55,14 @@ ipcMain.on('insert-new-client', (_, data) => {
   })
   db.close();
 });
+
+// Todo error handling 
+ipcMain.handle('get-all-clients', async (event, data) => {
+  return new Promise( (resolve, reject) => {
+    const db = new sqlite3.Database(dbFilePath);
+    db.all(data.query, [], (err, rows) => {
+      db.close();
+      resolve(rows)
+    });
+  })
+})
