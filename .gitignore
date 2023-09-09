@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-/public/loantracker.db
+loantracker.db
 
 # dependencies
 /node_modules
