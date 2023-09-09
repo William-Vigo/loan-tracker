@@ -57,7 +57,7 @@ ipcMain.on('insert-new-client', (_, data) => {
 });
 
 // Todo error handling 
-ipcMain.handle('get-all-clients', async (event, data) => {
+ipcMain.handle('get-all', async (event, data) => {
   return new Promise( (resolve, reject) => {
     const db = new sqlite3.Database(dbFilePath);
     db.all(data.query, [], (err, rows) => {

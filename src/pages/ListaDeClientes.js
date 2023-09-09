@@ -25,7 +25,7 @@ function ListaDeClientes() {
     const fetchData = async() => {
         const sql = "SELECT * FROM Clients";
         // setup listener
-        const result = await window.electron.invoke('get-all-clients', {
+        const result = await window.electron.invoke('get-all', {
             query: sql
         });
         setRowData(result)
@@ -36,7 +36,7 @@ function ListaDeClientes() {
   return (
     <>
     <input type="text"  placeholder="Busca..." onChange={(e) => gridApi.setQuickFilter(e.target.value)}></input>
-    <div className="ag-theme-alpine" style={{ height: 400, width: 600 }}>
+    <div className="ag-theme-alpine" style={{ height: 400, width: 1000 }}>
       <AgGridReact onGridReady={onGridReady} rowData={rowData} columnDefs={columnDefs}></AgGridReact>
     </div>
     </>
