@@ -4,7 +4,6 @@ import { AgGridReact } from "ag-grid-react";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { GridApi } from "ag-grid-community";
 
 function ListaDeClientes() {
     const [rowData, setRowData] = useState();
