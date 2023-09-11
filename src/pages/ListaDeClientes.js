@@ -6,7 +6,8 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import IconButton from '@mui/material/IconButton';
 import {ReactComponent as DeleteIcon} from '../assets/delete.svg';
 import { documentTypes } from "../constants";
-import { Input } from "@mui/material";
+import { Box, Input, Typography } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 function documentTypeGetDisplayValue(params) {
   const mapping = {
@@ -44,6 +45,11 @@ function onDeleteRow(params) {
   console.log("deleted",params)
   // once deleted from the db, update the state of the rows
 }
+
+const containerStyle = {
+    border: '1px solid #000',  // Adjust border properties as needed
+    boxShadow: '0px 4px 2px -2px gray',  // Adjust shadow properties as needed
+  };
 
 function ListaDeClientes() {
   const [rowData, setRowData] = useState();
@@ -125,20 +131,46 @@ function ListaDeClientes() {
   }, []);
 
   return (
-    <>
-    <Input placeholder="Busca ..." onChange={(e) => gridApi.setQuickFilter(e.target.value)}/>
-    <div className="ag-theme-alpine" style={{ height: 400, width: 1000 }}>
-      <AgGridReact
-      onGridReady={onGridReady}
-      rowData={rowData}
-      columnDefs={columnDefs}
-      onCellEditingStopped={onCellEditingStopped}
-      editType={'fullRow'}
-      rowSelection={'single'}
-      animateRows={true}
-       />
-    </div>
-    </>
+    <Box
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
+    >
+      <Grid2 container justifyContent={"center"} gap={4}>
+        <Grid2 xs={11}>
+          <div style={containerStyle}><p>hello</p></div>
+        </Grid2>
+        <Grid2 xs={11}>
+          <div style={containerStyle}>
+            <Grid2 container direction={"column"} gap={2}>
+              <Grid2 xs={12}>
+                <Grid2 container direction={"row"} justifyContent={"space-between"} style={{ padding: '0 16px' }} alignItems={"flex-end"}>
+                  <Grid2 xs={2}>
+                    <Typography variant={"h4"}>Clientes</Typography>
+                  </Grid2>
+                  <Grid2 xs={2}>
+                    <Input placeholder="Busca ..." onChange={(e) => gridApi.setQuickFilter(e.target.value)}/>
+                  </Grid2>
+                </Grid2>
+              </Grid2>
+              <Grid2 xs={12}>
+              <div className="ag-theme-alpine" style={{ height: 400, width: "100%" }}>
+                <AgGridReact
+                onGridReady={onGridReady}
+                rowData={rowData}
+                columnDefs={columnDefs}
+                onCellEditingStopped={onCellEditingStopped}
+                editType={'fullRow'}
+                rowSelection={'single'}
+                animateRows={true}
+                />
+              </div>
+              </Grid2>
+            </Grid2>
+            </div>
+        </Grid2>
+      </Grid2>
+    </Box>
   );
 }
 
