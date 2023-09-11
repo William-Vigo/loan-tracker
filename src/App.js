@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Pagos from "./pages/Pagos";
 import Transacciones from "./pages/Transacciones";
 import "./App.css"
-import SidebarV2 from './components/Sidebar';
+import SidebarV2 from './components/sidebar/Sidebar';
 import ClientesHome from './pages/ClientesHome';
 import { NewClientV2 } from './pages/NuevoCliente';
 import { Box } from '@mui/material';

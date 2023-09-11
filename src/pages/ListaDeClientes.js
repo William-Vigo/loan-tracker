@@ -8,6 +8,7 @@ import {ReactComponent as DeleteIcon} from '../assets/delete.svg';
 import { documentTypes } from "../constants";
 import { Box, Input, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import SearchInput from "../components/search/search";
 
 function documentTypeGetDisplayValue(params) {
   const mapping = {
@@ -149,7 +150,7 @@ function ListaDeClientes() {
                     <Typography variant={"h4"}>Clientes</Typography>
                   </Grid2>
                   <Grid2 xs={2}>
-                    <Input placeholder="Busca ..." onChange={(e) => gridApi.setQuickFilter(e.target.value)}/>
+                    <SearchInput onChange={(e) => gridApi.setQuickFilter(e.target.value)}/>
                   </Grid2>
                 </Grid2>
               </Grid2>
