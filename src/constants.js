@@ -14,4 +14,9 @@ export const documentTypes = {
     },
 }
 
+export const windowSize = {
+    width: 1400,
+    height: 1000,
+}
+
 

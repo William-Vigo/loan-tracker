@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
-
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import "./ListaDeClientes.css";
 import IconButton from '@mui/material/IconButton';
 import {ReactComponent as DeleteIcon} from '../assets/delete.svg';
-import { documentTypes } from "../constants";
+import { documentTypes, windowSize } from "../constants";
 import { Box, Input, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import SearchInput from "../components/search/search";
@@ -51,7 +51,7 @@ const containerStyle = {
     border: "1px solid #ccc",
     borderRadius: "10px",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    padding: "20px"
+    //padding: "20px"
   };
 
 function ListaDeClientes() {
@@ -146,11 +146,11 @@ function ListaDeClientes() {
         </Grid2>
         <Grid2 xs={11}>
           <div style={containerStyle}>
-            <Grid2 container direction={"column"} gap={2}>
+            <Grid2 container direction={"column"} gap={2} paddingTop={"30px"}>
               <Grid2 xs={12}>
-                <Grid2 container direction={"row"} justifyContent={"space-between"} alignItems={"flex-end"}>
+                <Grid2 container direction={"row"} justifyContent={"space-between"} alignItems={"flex-end"} style={{ padding: '0 16px' }}>
                   <Grid2 xs={2}>
-                    <Typography variant={"h4"}>Clientes</Typography>
+                    <Typography variant={"h4"} style={{fontFamily: "Poppins-ExtraLight"}}>Clientes</Typography>
                   </Grid2>
                   <Grid2 xs={2}>
                     <SearchInput onChange={(e) => gridApi.setQuickFilter(e.target.value)}/>
@@ -158,7 +158,7 @@ function ListaDeClientes() {
                 </Grid2>
               </Grid2>
               <Grid2 xs={12}>
-              <div className="ag-theme-alpine" style={{ height: 400, width: "100%" }}>
+              <div className="ag-theme-alpine" style={{ height: `${windowSize.height - 400}px`, width: "100%" }}>
                 <AgGridReact
                 onGridReady={onGridReady}
                 rowData={rowData}
@@ -167,6 +167,7 @@ function ListaDeClientes() {
                 editType={'fullRow'}
                 rowSelection={'single'}
                 animateRows={true}
+                rowHeight={50}
                 />
               </div>
               </Grid2>
