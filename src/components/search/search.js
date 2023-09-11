@@ -4,7 +4,7 @@ import {ReactComponent as SearchIcon} from "../../assets/search.svg"
 
 function SearchInput({ onChange}) {
   return (
-    <Paper variant="outlined" style={{ display: 'flex', alignItems: 'center', padding: '2px', borderColor: "#ccc"}}>
+    <Paper variant="outlined" style={{ display: 'flex', alignItems: 'center', padding: '2px', borderColor: "#ccc", height: "25px"}}>
         <SearchIcon type="submit" style={{ padding: '5px' }}/>
         <InputBase
             placeholder="Busca . . ."

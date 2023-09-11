@@ -148,9 +148,9 @@ function ListaDeClientes() {
           <div style={containerStyle}>
             <Grid2 container direction={"column"} gap={2} paddingTop={"30px"}>
               <Grid2 xs={12}>
-                <Grid2 container direction={"row"} justifyContent={"space-between"} alignItems={"flex-end"} style={{ padding: '0 16px' }}>
+                <Grid2 container direction={"row"} justifyContent={"space-between"} alignItems={"flex-end"} style={{ padding: '0 18px' }}>
                   <Grid2 xs={2}>
-                    <Typography variant={"h4"} style={{fontFamily: "Poppins-ExtraLight"}}>Clientes</Typography>
+                    <Typography variant={"h5"} style={{fontFamily: "Poppins-ExtraLight"}}>Clientes</Typography>
                   </Grid2>
                   <Grid2 xs={2}>
                     <SearchInput onChange={(e) => gridApi.setQuickFilter(e.target.value)}/>
