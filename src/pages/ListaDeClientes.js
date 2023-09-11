@@ -48,8 +48,10 @@ function onDeleteRow(params) {
 }
 
 const containerStyle = {
-    border: '1px solid #000',  // Adjust border properties as needed
-    boxShadow: '0px 4px 2px -2px gray',  // Adjust shadow properties as needed
+    border: "1px solid #ccc",
+    borderRadius: "10px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    padding: "20px"
   };
 
 function ListaDeClientes() {
@@ -133,11 +135,12 @@ function ListaDeClientes() {
 
   return (
     <Box
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      minHeight="100vh"
     >
-      <Grid2 container justifyContent={"center"} gap={4}>
+      <Grid2 container justifyContent={"center"} gap={4} >
         <Grid2 xs={11}>
           <div style={containerStyle}><p>hello</p></div>
         </Grid2>
@@ -145,7 +148,7 @@ function ListaDeClientes() {
           <div style={containerStyle}>
             <Grid2 container direction={"column"} gap={2}>
               <Grid2 xs={12}>
-                <Grid2 container direction={"row"} justifyContent={"space-between"} style={{ padding: '0 16px' }} alignItems={"flex-end"}>
+                <Grid2 container direction={"row"} justifyContent={"space-between"} alignItems={"flex-end"}>
                   <Grid2 xs={2}>
                     <Typography variant={"h4"}>Clientes</Typography>
                   </Grid2>
