@@ -5,7 +5,6 @@ const isDev = require('electron-is-dev');
 
 require('@electron/remote/main').initialize()
 dbFilePath = './public/loantracker.db';
-
 function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
@@ -64,5 +63,25 @@ ipcMain.handle('get-all', async (event, data) => {
       db.close();
       resolve(rows)
     });
+  })
+})
+
+// Todo error handling
+/* ex: 
+data: {
+  query: "DELETE FROM [tableName] WHERE [columnName] = ?"
+  value: id 
+}
+*/
+ipcMain.handle('delete', async (event, data) => {
+  return new Promise ((resolve, reject) => {
+    console.log(data)
+    const db = new sqlite3.Database(dbFilePath);
+    db.run(data.query, [data.value], function(err) {
+      if (err) {
+        return reject(new Error(err.message))
+      }
+      resolve({message: `Rows deleted: ${this.changes}`})
+    })
   })
 })

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -42,20 +42,15 @@ function onCellEditingStopped(params) {
   // update any other value
 }
 
-function onDeleteRow(params) {
-  console.log("deleted",params)
-  // once deleted from the db, update the state of the rows
-}
 
 const containerStyle = {
     border: "1px solid #ccc",
     borderRadius: "10px",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    //padding: "20px"
   };
 
 function ListaDeClientes() {
-  const [rowData, setRowData] = useState();
+  const [rowData, setRowData] = useState([]);
   const [gridApi, setGridApi] = useState(null);
   const [, setGridColumnApi] = useState(null);
   const [columnDefs] = useState([
@@ -64,6 +59,7 @@ function ListaDeClientes() {
         headerName: "Nombre",
         editable: true,
         sortable: true,
+        flex: 1,
       },
       {
         field:"documentType",
@@ -80,30 +76,35 @@ function ListaDeClientes() {
         valueGetter: documentTypeGetDisplayValue, // shows how value should be displayed on the grid
         valueSetter: documentTypeSetDisplayValue, // takes value and parses it to appropriate format
         sortable: true,
+        flex: 1,
       },
       {
         field:"documentID",
         headerName: "No. Documento",
         editable: true,
         sortable: true,
+        flex: 1,
       },
       {
         field:"address",
         headerName: "Address",
         editable: true,
         sortable: true,
+        flex: 1,
       },
       {
         field:"email",
         headerName: "Correo",
         editable: true,
         sortable: true,
+        flex: 1,
       },
       {
         field:"cellNumber",
         headerName: "Telefono",
         editable: true,
         sortable: true,
+        flex: 1,
       },
       {
         field: "actions",
@@ -111,7 +112,7 @@ function ListaDeClientes() {
         width: 100,
         cellRenderer: (params) => (
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-            <IconButton aria-label="delete" size="small">
+            <IconButton aria-label="delete" size="small" onClick={() => onDeleteRow(params)}>
               <DeleteIcon/>
             </IconButton>
             </div>
@@ -131,8 +132,25 @@ function ListaDeClientes() {
         setRowData(result)
     }
     fetchData();
+
   }, []);
 
+  // TODO: before deleting create a pop up confirms the deletion
+  const onDeleteRow = (params) => {
+    console.log("deleted",params)
+    console.log("_id", params.data._id)
+    // remove from table
+    const deleteRow = async() => {
+      const result = await window.electron.invoke('delete', {
+        query: "DELETE FROM Clients WHERE _id = ?",
+        value: params.data._id,
+      })
+      console.log("db response", result);
+    }
+    deleteRow();
+    // once deleted from the db, update the table
+    params.api.applyTransaction({remove: [params.node.data]})
+  }
   return (
     <Box
       display="flex"
@@ -141,9 +159,6 @@ function ListaDeClientes() {
       minHeight="100vh"
     >
       <Grid2 container justifyContent={"center"} gap={4} >
-        <Grid2 xs={11}>
-          <div style={containerStyle}><p>hello</p></div>
-        </Grid2>
         <Grid2 xs={11}>
           <div style={containerStyle}>
             <Grid2 container direction={"column"} gap={2} paddingTop={"30px"}>
