@@ -41,7 +41,7 @@ app.on('activate', function () {
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
 
-// Todo erorr handling
+// TODO erorr handling
 ipcMain.on('insert-new-client', (_, data) => {
   console.log(data)
   const db = new sqlite3.Database(dbFilePath);
@@ -55,7 +55,7 @@ ipcMain.on('insert-new-client', (_, data) => {
   db.close();
 });
 
-// Todo error handling 
+// TODO error handling 
 ipcMain.handle('get-all', async (event, data) => {
   return new Promise( (resolve, reject) => {
     const db = new sqlite3.Database(dbFilePath);
@@ -66,7 +66,7 @@ ipcMain.handle('get-all', async (event, data) => {
   })
 })
 
-// Todo error handling
+// TODO error handling
 /* ex: 
 data: {
   query: "DELETE FROM [tableName] WHERE [columnName] = ?"
