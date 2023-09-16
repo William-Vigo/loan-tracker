@@ -150,6 +150,8 @@ function ListaDeClientes() {
     deleteRow();
     // once deleted from the db, update the table
     params.api.applyTransaction({remove: [params.node.data]})
+
+    // TODO: add a notification once delete is successful
   }
   return (
     <Box
