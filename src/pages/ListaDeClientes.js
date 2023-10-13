@@ -32,14 +32,43 @@ function documentTypeSetDisplayValue(params) {
 function onCellEditingStopped(params) {
   console.log(params)
   if (!params.valueChanged) {
-    console.log("no change")
     return
   }
-  if (params.colDef.field === "documentType") {
-    // validate that the new document number doesn't exist in the db
+  const checkDuplicateID = () => {
+    return window.electron.invoke('id-exist', {
+      query: `SELECT EXISTS(SELECT * FROM Clients WHERE documentID = ?) as id_exist`,
+      values: [
+        params.newValue
+      ]
+    })
   }
-  
-  // update any other value
+
+  const updateRow = async() => {
+      const result = await window.electron.invoke('update-client-info-by-id', {
+        query: `UPDATE Clients SET ${params.colDef.field} = ? WHERE _id = ?`,
+        values: [
+          params.data[params.colDef.field],
+          params.data._id
+        ]
+      })
+      console.log("db response", result);
+    }
+  if (params.colDef.field === "documentID") {
+    // validate that the new document number doesn't exist in the db
+    checkDuplicateID()
+    .then(exists => {
+      console.log("exists", exists)
+      if (exists) {
+        console.log("duplicate id")
+        params.node.setDataValue(params.colDef.field, params.oldValue)
+        //TODO: send notifcation to screen
+        return
+      }
+      updateRow() 
+    })
+    return
+  } 
+    updateRow()
 }
 
 

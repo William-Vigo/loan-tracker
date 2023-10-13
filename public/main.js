@@ -43,7 +43,6 @@ app.on('activate', function () {
 
 // TODO erorr handling
 ipcMain.on('insert-new-client', (_, data) => {
-  console.log(data)
   const db = new sqlite3.Database(dbFilePath);
   db.run(data.query, data.values, function(err) {
     if (err) {
@@ -75,13 +74,45 @@ data: {
 */
 ipcMain.handle('delete', async (event, data) => {
   return new Promise ((resolve, reject) => {
-    console.log(data)
     const db = new sqlite3.Database(dbFilePath);
     db.run(data.query, [data.value], function(err) {
       if (err) {
         return reject(new Error(err.message))
       }
       resolve({message: `Rows deleted: ${this.changes}`})
+    })
+  })
+})
+
+ipcMain.handle('update-client-info-by-id', async(event, data) => {
+  console.log("calling update-client-info")
+  return new Promise((resolve,reject) => {
+    const db = new  sqlite3.Database(dbFilePath);
+    db.run(data.query, data.values, function(err){
+      if (err) {
+        console.log("err:", err)
+        return reject(err)
+      }
+      resolve({message: `Rows updated: ${this.changes}`})
+      db.close()
+    })
+  })
+})
+
+ipcMain.handle('id-exist', async(event, data) => {
+  console.log("calling id-exist")
+  return new Promise((resolve,reject) => {
+    const db = new  sqlite3.Database(dbFilePath);
+    db.get(data.query, data.values, function(err, row){
+      if (err) {
+        console.log("err:", err)
+        reject(err)
+      }
+      if (row.id_exist === 1) {
+        resolve(true)
+        return
+      }
+      resolve(false)
     })
   })
 })
