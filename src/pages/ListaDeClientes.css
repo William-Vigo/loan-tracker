@@ -1,0 +1,22 @@
+.ag-theme-alpine {
+    --ag-borders: none;
+    --ag-font-family: "Poppins-ExtraLight";
+    --ag-font-size: 13px;
+    --ag-header-background-color: transparent;
+    --ag-odd-row-background-color: transparent;
+}
+
+.ag-theme-alpine .ag-header-cell-label {
+    font-weight: 400; /* Adjust the value as per your preference */
+}
+
+.ag-theme-alpine .ag-cell {
+    font-weight: 600; /* Adjust the value as per your preference */
+    vertical-align: middle;
+    line-height: middle;
+}
+
+.ag-theme-alpine .ag-header-cell, 
+.ag-theme-alpine .ag-header-group-cell {
+    border-bottom: 1px solid #ccc !important; /* Adjust color and width as needed */
+}

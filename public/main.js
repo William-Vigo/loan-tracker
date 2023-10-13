@@ -4,12 +4,12 @@ const path = require('path')
 const isDev = require('electron-is-dev');
 
 require('@electron/remote/main').initialize()
-
+dbFilePath = './public/loantracker.db';
 function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1400,
+    height: 1000,
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -41,9 +41,8 @@ app.on('activate', function () {
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
 
+// TODO erorr handling
 ipcMain.on('insert-new-client', (_, data) => {
-  console.log(data)
-  dbFilePath = './public/loantracker.db';
   const db = new sqlite3.Database(dbFilePath);
   db.run(data.query, data.values, function(err) {
     if (err) {
@@ -54,3 +53,66 @@ ipcMain.on('insert-new-client', (_, data) => {
   })
   db.close();
 });
+
+// TODO error handling 
+ipcMain.handle('get-all', async (event, data) => {
+  return new Promise( (resolve, reject) => {
+    const db = new sqlite3.Database(dbFilePath);
+    db.all(data.query, [], (err, rows) => {
+      db.close();
+      resolve(rows)
+    });
+  })
+})
+
+// TODO error handling
+/* ex: 
+data: {
+  query: "DELETE FROM [tableName] WHERE [columnName] = ?"
+  value: id 
+}
+*/
+ipcMain.handle('delete', async (event, data) => {
+  return new Promise ((resolve, reject) => {
+    const db = new sqlite3.Database(dbFilePath);
+    db.run(data.query, [data.value], function(err) {
+      if (err) {
+        return reject(new Error(err.message))
+      }
+      resolve({message: `Rows deleted: ${this.changes}`})
+    })
+  })
+})
+
+ipcMain.handle('update-client-info-by-id', async(event, data) => {
+  console.log("calling update-client-info")
+  return new Promise((resolve,reject) => {
+    const db = new  sqlite3.Database(dbFilePath);
+    db.run(data.query, data.values, function(err){
+      if (err) {
+        console.log("err:", err)
+        return reject(err)
+      }
+      resolve({message: `Rows updated: ${this.changes}`})
+      db.close()
+    })
+  })
+})
+
+ipcMain.handle('id-exist', async(event, data) => {
+  console.log("calling id-exist")
+  return new Promise((resolve,reject) => {
+    const db = new  sqlite3.Database(dbFilePath);
+    db.get(data.query, data.values, function(err, row){
+      if (err) {
+        console.log("err:", err)
+        reject(err)
+      }
+      if (row.id_exist === 1) {
+        resolve(true)
+        return
+      }
+      resolve(false)
+    })
+  })
+})

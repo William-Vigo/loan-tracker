@@ -1,7 +1,8 @@
-import { Box, Grid, TextField,  Autocomplete, Button, Typography, createTheme, ThemeProvider  } from "@mui/material";
+import { Box, TextField, Grid, Autocomplete, Button, Typography, createTheme, ThemeProvider  } from "@mui/material";
 import React from "react";
 import { Controller, useForm} from "react-hook-form";
 import {v4 as uuidv4} from "uuid"
+import { documentTypes } from "../constants";
 
 const fields = [
     {
@@ -15,16 +16,16 @@ const fields = [
         key: "documentType",
         options: [
             {
-                label: "DNI",
-                value: "dni",
+                label: documentTypes.DNI.displayValue,
+                value: documentTypes.DNI.value,
             },
             {
-                label: "Passaporte",
-                value: "passport",
+                label: documentTypes.Passport.displayValue,
+                value: documentTypes.Passport.value,
             },
             {
-                label: "Licencia",
-                value: "license",
+                label: documentTypes.License.displayValue,
+                value: documentTypes.License.value,
             },
         ]
     },

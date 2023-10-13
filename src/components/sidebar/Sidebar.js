@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {  Collapse, Drawer, List, ListItemButton, ListItemIcon, ListItemText, createTheme } from '@mui/material'
-import {ReactComponent as HomeIcon} from '../assets/home.svg';
-import {ReactComponent as ClientsIcon} from '../assets/clients.svg';
-import {ReactComponent as PaymentsIcon} from '../assets/clients.svg';
-import {ReactComponent as TransaccionesIcon} from '../assets/receipts.svg';
+import {ReactComponent as HomeIcon} from '../../assets/home.svg';
+import {ReactComponent as ClientsIcon} from '../../assets/clients.svg';
+import {ReactComponent as PaymentsIcon} from '../../assets/clients.svg';
+import {ReactComponent as TransaccionesIcon} from '../../assets/receipts.svg';
 import './Sidebar.css';
 import { ThemeProvider} from '@mui/system';
 
@@ -75,7 +75,6 @@ const sideBarTheme = createTheme({
 })
 
 function SidebarV2() {
-    console.log('sidebar render')
     const [open, setOpen] = React.useState(true);
 
     const HandleClick = () => {
