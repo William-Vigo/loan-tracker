@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect,  useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -6,7 +6,7 @@ import "./ListaDeClientes.css";
 import IconButton from '@mui/material/IconButton';
 import {ReactComponent as DeleteIcon} from '../assets/delete.svg';
 import { documentTypes, windowSize } from "../constants";
-import { Box, Input, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import SearchInput from "../components/search/search";
 
